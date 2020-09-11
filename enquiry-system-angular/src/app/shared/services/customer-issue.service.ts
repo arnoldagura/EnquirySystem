@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ServerConfig } from 'src/app/config/server.config';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CustomerIssue } from '../models/customer-issue.model';
 import { map } from 'rxjs/operators';
 import { CommonParams } from '../models/common.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class CustomerIssueService {
 
   submitCustomerIssue(issue: CustomerIssue) {
     const headers = new HttpHeaders().append('Accept', 'application/json');
-    return this.http.post(`${ServerConfig.API}CustomerIssue`, issue, { headers }).pipe(
+    return this.http.post(`${environment.apiUrl}CustomerIssue`, issue, { headers }).pipe(
       map(response => {
         return response;
       })
@@ -22,7 +22,7 @@ export class CustomerIssueService {
   }
 
   getCustomerIssues() {
-    return this.http.get(`${ServerConfig.API}CustomerIssue`).pipe(
+    return this.http.get(`${environment.apiUrl}CustomerIssue`).pipe(
       map(response => {
         return response as CustomerIssue[];
       })
@@ -31,7 +31,7 @@ export class CustomerIssueService {
 
   updateCustomerIssue(issue: CustomerIssue) {
     const headers = new HttpHeaders().append('Accept', 'application/json');
-    return this.http.put(`${ServerConfig.API}CustomerIssue`, issue, { headers }).pipe(
+    return this.http.put(`${environment.apiUrl}CustomerIssue`, issue, { headers }).pipe(
       map(response => {
         return response;
       })
@@ -40,7 +40,7 @@ export class CustomerIssueService {
 
   deleteCustomerIssue(id: number) {
     const headers = new HttpHeaders().append('Accept', 'application/json');
-    return this.http.delete(`${ServerConfig.API}CustomerIssue/${id}`, { headers }).pipe(
+    return this.http.delete(`${environment.apiUrl}CustomerIssue/${id}`, { headers }).pipe(
       map(response => {
         return response;
       })

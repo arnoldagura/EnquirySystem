@@ -1,0 +1,54 @@
+<ng-template #modal>
+    <div class="modal-content px-0 rounded bg-white d-block">
+        <button (click)="close()" type="button" class="close m-2" >
+          <i class="fa fa-times" ></i>
+        </button>
+        <div class="modal-topbar bg-gray-100">
+          <div class="text-uppercase text-center fs-14 text-dark py-3">
+            <!-- <span class="btn-white bg-transparent btn-circle btn-sm text-primary align-middle">
+                    <i class="align-middle icon-calendar-text fs-20"></i>
+                </span> -->
+            <span class="ml-3 align-middle fw-500">Add Admitting Info</span>
+          </div>
+        </div>
+        <div class=" modal-body pt-0">
+            <form #form="ngForm" autocomplete="off" (submit)="onSubmit()">
+                <input type="hidden" name="id" [value]="issue_form.id">
+                <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                    <div class="input-group-text bg-white">
+                        <i class="fas fa-tags" [class.green-icon]="category.valid" [class.red-icon]="category.invalid && category.touched"></i>
+                    </div>
+                    </div>
+                    <input name="category" #category="ngModel" [(ngModel)]="issue_form.category" class="form-control" placeholder="Issue Category" required>
+                </div>
+                </div>
+                <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                    <div class="input-group-text bg-white">
+                        <i class="fas fa-at" [class.green-icon]="email.valid" [class.red-icon]="email.invalid && email.touched"></i>
+                    </div>
+                    </div>
+                    <input name="email" #email="ngModel" [(ngModel)]="issue_form.email" class="form-control" placeholder="Email" required>
+                </div>
+                </div>
+                <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                    <div class="input-group-text bg-white">
+                        <i class="fas fa-info-circle" [class.green-icon]="description.valid" [class.red-icon]="description.invalid && description.touched"></i>
+                    </div>
+                    </div>
+                    <textarea name="description" #description="ngModel" [(ngModel)]="issue_form.description" class="form-control" placeholder="Description" required> </textarea>
+                </div>
+                </div>
+                <div class="form-group">
+                <button class="btn btn-primary btn-lg btn-block" type="submit" [disabled]="form.invalid"><i class="fas fa-database"></i> Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</ng-template>
+  

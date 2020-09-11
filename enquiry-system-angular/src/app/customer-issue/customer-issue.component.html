@@ -1,0 +1,17 @@
+
+    <div class="jumbotron mx-5 my-3" style="background-color: white; height: 95vh;">
+      <div class="d-flex align-items-center mx-5">
+        <div>
+            <h1 class="display-4 text-center">Customer Issues <span class="badge badge-warning rounded-circle"> {{ customerIssueCount$ | async}} </span></h1>
+        </div>
+        <div class="ml-auto">
+          <button (click)="addIssue()" class="btn btn-outline-dark bw-1 py-2">
+            <i class="fa fa-plus mr-2" ></i>ADD ISSUE
+          </button>
+        </div>
+      </div>
+      <hr>
+        <app-customer-issue-list></app-customer-issue-list>
+        <app-customer-issue-form #form (submit)="onSubmit($event)" >
+        </app-customer-issue-form>
+    </div>

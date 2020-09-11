@@ -1,0 +1,26 @@
+<div class="table-wrapper">
+  <table class="fl-table">
+    <thead class="thead-dark">
+      <tr>
+        <th>Category</th>
+        <th>Email</th>
+        <th>Description</th>
+        <th>Date Issued</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngIf="(customerIssues$ | async) as customerIssues">
+        <tr *ngFor="let ci of customerIssues">
+          <td (click)="populateForm(ci)">{{ ci.Category }}</td>
+          <td (click)="populateForm(ci)">{{ ci.Email }}</td>
+          <td (click)="populateForm(ci)">{{ ci.Description }}</td>
+          <td (click)="populateForm(ci)">{{ ci.DateCreated | date:'MMM d, y, h:mm:ss a' }}</td> 
+          <td class="text-center">
+            <i class="fa fa-trash fa-lg text-danger" (click)="onDelete(ci.Id)"></i>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+  </div>

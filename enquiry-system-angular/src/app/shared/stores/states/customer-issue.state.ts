@@ -7,7 +7,7 @@ import { Selector, State, StateContext } from '@ngxs/store';
 import { throwError } from 'rxjs';
 import { CustomerIssueService } from '../../services/customer-issue.service';
 import { CustomerIssue } from '../../models/customer-issue.model';
-import { GetCustomerIssues, UpdateCustomerIssue } from '../actions/customer-issue.action';
+import { GetCustomerIssues, GetCustomerIssuesByEmail, UpdateCustomerIssue } from '../actions/customer-issue.action';
 
 export class CustomerIssueStateModel {
   customer_issues: CustomerIssue[];
@@ -43,7 +43,7 @@ export class CustomerIssueState {
 
   @Selector()
   static customerIssueCount({ customer_issues }: CustomerIssueStateModel) {
-    return customer_issues.length;
+    return customer_issues ? customer_issues.length : 0 ;
   }
 
   @Receiver({ action: GetCustomerIssues, cancelUncompleted: true })
@@ -60,6 +60,30 @@ export class CustomerIssueState {
         }));
         const error = {
           type: GetCustomerIssues.type,
+          message: err.error,
+          status: 400,
+          showToast: false
+        };
+        this.appStatusEmitter.errors.emit(error);
+        return throwError(err);
+      })
+    );
+  }
+
+  @Receiver({ action: GetCustomerIssuesByEmail, cancelUncompleted: true })
+  static getCustomerIssuesByEmail({ setState }: StateContext<CustomerIssueStateModel>, { payload }: GetCustomerIssuesByEmail) {
+    return this.customerIssueService.getCustomerIssuesByEmail(payload).pipe(
+      tap(result => {
+        setState(produce((draft: CustomerIssueStateModel) => {
+          draft.customer_issues = result;
+        }));
+      }),
+      catchError(err => {
+        setState(produce((draft: CustomerIssueStateModel) => {
+          draft.customer_issues = [];
+        }));
+        const error = {
+          type: GetCustomerIssuesByEmail.type,
           message: err.error,
           status: 400,
           showToast: false

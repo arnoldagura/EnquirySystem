@@ -1,4 +1,3 @@
-<ng-container  *ngIf="(user$ | async) as user">
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     
@@ -21,8 +20,8 @@
           <div>
               <h1 class="display-4 text-center">Customer Issues <span class="badge badge-warning rounded-circle"> {{ customerIssueCount$ | async}} </span></h1>
           </div>
-          <div *ngIf="user.userType != 'Admin'" class="ml-auto">
-            <button  (click)="addIssue()" class="btn btn-outline-dark bw-1 py-2">
+          <div  class="ml-auto">
+            <button *ngIf="user.userType != 'Admin'"  (click)="addIssue()" class="btn btn-outline-dark bw-1 py-2">
               <i class="fa fa-plus mr-2" ></i>ADD ISSUE
             </button>
           </div>
@@ -32,4 +31,3 @@
           <app-customer-issue-form #issueForm (submit)="onSubmit($event)" >
           </app-customer-issue-form>
       </div>
-</ng-container>

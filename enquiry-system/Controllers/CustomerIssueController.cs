@@ -25,10 +25,10 @@ namespace EnquirySystem.Controllers
             return _customerIssueContext.CustomerIssues.OrderByDescending(x => x.Id).ToList();
         }
 
-        [HttpGet("{id}")]
-        public ActionResult<CustomerIssue> GetstringById(int id)
+        [HttpGet("{email}")]
+        public ActionResult<List<CustomerIssue>> GetstringByEmail(string email)
         {
-            return _customerIssueContext.CustomerIssues.FirstOrDefault(issue => issue.Id == id);
+            return _customerIssueContext.CustomerIssues.Where(issue => issue.Email == email).ToList();
         }
 
         [HttpPost("")]

@@ -18,6 +18,9 @@ export class CustomerIssueListComponent implements OnInit {
   @Emitter(CustomerIssueState.getCustomerIssues)
   private getCustomerIssues: Emittable<void>;
 
+  @Emitter(CustomerIssueState.getCustomerIssuesByEmail)
+  private getCustomerIssuesByEmail: Emittable<string>;
+
   @Select(CustomerIssueState.customerIssues)
   customerIssues$: Observable<CustomerIssue[]>;
 
@@ -29,11 +32,20 @@ export class CustomerIssueListComponent implements OnInit {
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
-     this.getCustomerIssues.emit();
+    this.loadList();
   }
 
   populateForm(ci: CustomerIssue) {
     // this.service.formData = Object.assign({}, ci);
+  }
+
+  loadList(){
+    if(this.user.userType == 'Admin')
+    {
+      this.getCustomerIssues.emit();
+    } else {
+      this.getCustomerIssuesByEmail.emit(this.user.email);
+    }
   }
 
   onDelete(id) {
@@ -41,7 +53,7 @@ export class CustomerIssueListComponent implements OnInit {
       this.customerIssueService.deleteCustomerIssue(id).subscribe(
         res => {
           this.toastr.info('Deleted Successfully', 'Customer Issue');
-          this.getCustomerIssues.emit();
+          this.loadList();
         },
         err => {
           console.log(err);

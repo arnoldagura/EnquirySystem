@@ -5,6 +5,11 @@ export class GetCustomerIssues {
   constructor(public payload: void) { }
 }
 
+export class GetCustomerIssuesByEmail {
+  public static readonly type = '[CustomerIssue] Get Customer Issues By Email';
+  constructor(public payload: string) { }
+}
+
 export class UpdateCustomerIssue {
   public static readonly type = '[CustomerIssue] Update Customer Issue';
   constructor(public payload: CustomerIssue) { }

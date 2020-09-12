@@ -1,5 +1,6 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Emitter, Emittable } from '@ngxs-labs/emitter';
+import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
 import { Select } from '@ngxs/store';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
@@ -23,11 +24,17 @@ export class CustomerIssueComponent implements OnInit {
   @Emitter(CustomerIssueState.getCustomerIssues)
   private getCustomerIssues: Emittable<void>;
 
+  @Emitter(CustomerIssueState.getCustomerIssuesByEmail)
+  private getCustomerIssuesByEmail: Emittable<string>;
+
   @Select(CustomerIssueState.customerIssueCount)
   customerIssueCount$: Observable<number>;
   
   @Select(AuthState.user)
   user$: Observable<User>;
+  
+  @SelectSnapshot(AuthState.user)
+  user: User;
 
   constructor(
     public customerIssueService: CustomerIssueService,
@@ -43,7 +50,12 @@ export class CustomerIssueComponent implements OnInit {
   onSubmit(issue) {
     this.customerIssueService.submitCustomerIssue(issue).subscribe(  res => {
       this.toastr.success('Added Successfully', 'Customer Issue');
-      this.getCustomerIssues.emit();
+      if(this.user.userType == 'Admin')
+      {
+        this.getCustomerIssues.emit();
+      } else {
+        this.getCustomerIssuesByEmail.emit(this.user.email);
+      }
       this.issue_form_modal.close();
     },
     err => {

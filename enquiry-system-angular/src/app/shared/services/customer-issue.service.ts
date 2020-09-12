@@ -29,6 +29,14 @@ export class CustomerIssueService {
     );
   }
 
+  getCustomerIssuesByEmail(email: string) {
+    return this.http.get(`${environment.apiUrl}CustomerIssue/${email}`).pipe(
+      map(response => {
+        return response as CustomerIssue[];
+      })
+    );
+  }
+
   updateCustomerIssue(issue: CustomerIssue) {
     const headers = new HttpHeaders().append('Accept', 'application/json');
     return this.http.put(`${environment.apiUrl}CustomerIssue`, issue, { headers }).pipe(

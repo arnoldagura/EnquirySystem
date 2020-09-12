@@ -1,6 +1,9 @@
 import { Component, EventEmitter, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { CustomerIssue } from 'src/app/shared/models/customer-issue.model';
 import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SelectSnapshot } from '@ngxs-labs/select-snapshot';
+import { User } from 'src/app/shared/models/user.model';
+import { AuthState } from 'src/app/shared/stores/states/auth.state';
 
 @Component({
   selector: 'app-customer-issue-form',
@@ -13,6 +16,8 @@ export class CustomerIssueFormComponent implements OnInit {
 
   @Output()
   submit: EventEmitter<CustomerIssue> = new EventEmitter<CustomerIssue>();
+  @SelectSnapshot(AuthState.user)
+  user: User;
   
   @ViewChild('modal', { static: true })
   private modalCreated: TemplateRef<any>;
@@ -25,7 +30,7 @@ export class CustomerIssueFormComponent implements OnInit {
     this.issue_form = {
       category: null,
       description: null,
-      email: null
+      email: this.user.email
     }
   }
 

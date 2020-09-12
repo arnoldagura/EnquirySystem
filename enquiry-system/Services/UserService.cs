@@ -63,6 +63,9 @@ namespace EnquirySystem.Services
             if (_context.Users.Any(x => x.Username == user.Username))
                 throw new Exception("Username \"" + user.Username + "\" is already taken");
 
+            if (_context.Users.Any(x => x.Email == user.Email))
+                throw new Exception("Email \"" + user.Email + "\" is already taken");
+
             byte[] passwordHash, passwordSalt;
             CreatePasswordHash(password, out passwordHash, out passwordSalt);
 

@@ -27,7 +27,7 @@ export class RegistrationComponent implements OnInit {
       lastName: null,
       email: null,
       username: null,
-      userType: null,
+      userType: 'Admin',
       password: null
     };
     this.message = null;

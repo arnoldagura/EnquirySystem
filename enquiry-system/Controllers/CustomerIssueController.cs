@@ -28,7 +28,7 @@ namespace EnquirySystem.Controllers
         [HttpGet("{email}")]
         public ActionResult<List<CustomerIssue>> GetstringByEmail(string email)
         {
-            return _customerIssueContext.CustomerIssues.Where(issue => issue.Email == email).ToList();
+            return _customerIssueContext.CustomerIssues.Where(issue => issue.Email == email).OrderByDescending(x => x.Id).ToList();
         }
 
         [HttpPost("")]

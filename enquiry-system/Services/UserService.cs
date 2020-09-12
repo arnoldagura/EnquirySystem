@@ -63,9 +63,11 @@ namespace EnquirySystem.Services
             if (_context.Users.Any(x => x.Username == user.Username))
                 throw new Exception("Username \"" + user.Username + "\" is already taken");
 
+            if(!this.IsValidEmail(user.Email))
+                 throw new Exception("Email \"" + user.Email + "\" is not valid");
+                 
             if (_context.Users.Any(x => x.Email == user.Email))
                 throw new Exception("Email \"" + user.Email + "\" is already taken");
-
             byte[] passwordHash, passwordSalt;
             CreatePasswordHash(password, out passwordHash, out passwordSalt);
 
@@ -127,7 +129,16 @@ namespace EnquirySystem.Services
         }
 
         // private helper methods
-
+        bool IsValidEmail(string email)
+        {
+            try {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch {
+                return false;
+            }
+        }
         private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             if (password == null) throw new ArgumentNullException("password");

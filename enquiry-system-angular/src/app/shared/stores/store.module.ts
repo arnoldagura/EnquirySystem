@@ -13,6 +13,7 @@ import { AppStatusState } from './states/app-status.state';
 // EMITTERS
 import { AppStatusEmitter } from './emitters/app-status.emitter';
 import { CustomerIssueState } from './states/customer-issue.state';
+import { AuthState } from './states/auth.state';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { CustomerIssueState } from './states/customer-issue.state';
       // Add states here
       AppState,
       AppStatusState,
+      AuthState,
       CustomerIssueState,
     ])
   ],

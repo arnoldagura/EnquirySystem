@@ -3,14 +3,16 @@ using System;
 using EnquirySystem.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EnquirySystem.Migrations
 {
     [DbContext(typeof(CustomerIssueContext))]
-    partial class CustomerIssueContextModelSnapshot : ModelSnapshot
+    [Migration("20200912110428_User")]
+    partial class User
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

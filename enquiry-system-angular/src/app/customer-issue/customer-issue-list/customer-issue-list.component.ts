@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CustomerIssue } from 'src/app/shared/models/customer-issue.model';
 import { CustomerIssueService } from 'src/app/shared/services/customer-issue.service';
 import { ToastrService } from 'ngx-toastr';
@@ -6,6 +6,7 @@ import { CustomerIssueState } from 'src/app/shared/stores/states/customer-issue.
 import { Emittable, Emitter } from '@ngxs-labs/emitter';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
+import { User } from 'src/app/shared/models/user.model';
 
 @Component({
   selector: 'app-customer-issue-list',
@@ -20,12 +21,15 @@ export class CustomerIssueListComponent implements OnInit {
   @Select(CustomerIssueState.customerIssues)
   customerIssues$: Observable<CustomerIssue[]>;
 
+  @Input()
+  private user: User;
+
   constructor(
     public customerIssueService: CustomerIssueService,
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.getCustomerIssues.emit();
+     this.getCustomerIssues.emit();
   }
 
   populateForm(ci: CustomerIssue) {

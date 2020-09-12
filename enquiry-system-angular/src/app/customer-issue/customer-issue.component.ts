@@ -3,7 +3,10 @@ import { Emitter, Emittable } from '@ngxs-labs/emitter';
 import { Select } from '@ngxs/store';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
+import { User } from '../shared/models/user.model';
+import { AuthenticationService } from '../shared/services/authentication.service';
 import { CustomerIssueService } from '../shared/services/customer-issue.service';
+import { AuthState } from '../shared/stores/states/auth.state';
 import { CustomerIssueState } from '../shared/stores/states/customer-issue.state';
 import { CustomerIssueFormComponent } from './customer-issue-form/customer-issue-form.component';
 
@@ -14,7 +17,7 @@ import { CustomerIssueFormComponent } from './customer-issue-form/customer-issue
 })
 export class CustomerIssueComponent implements OnInit {
 
-  @ViewChild('form', { static: true })
+  @ViewChild('issueForm', { static: true })
   issue_form_modal: CustomerIssueFormComponent;
 
   @Emitter(CustomerIssueState.getCustomerIssues)
@@ -23,8 +26,12 @@ export class CustomerIssueComponent implements OnInit {
   @Select(CustomerIssueState.customerIssueCount)
   customerIssueCount$: Observable<number>;
   
+  @Select(AuthState.user)
+  user$: Observable<User>;
+
   constructor(
     public customerIssueService: CustomerIssueService,
+    private authenticationService: AuthenticationService,
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
@@ -42,5 +49,9 @@ export class CustomerIssueComponent implements OnInit {
     err => {
       console.log(err);
     });
+  }  
+  logout() {
+    this.authenticationService.logout();
   }
+
 }

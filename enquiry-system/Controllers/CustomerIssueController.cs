@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using EnquirySystem.Models;
+using EnquirySystem.Helpers;
+using Microsoft.AspNetCore.Authorization;
+
 namespace EnquirySystem.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CustomerIssueController : ControllerBase

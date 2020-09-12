@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\p\\Desktop\\emlo-assignment\\enquiry-system\\EnquirySystem.csproj": {}
+    "C:\\Users\\p\\Documents\\EnquirySystem\\enquiry-system\\EnquirySystem.csproj": {}
   },
   "projects": {
-    "C:\\Users\\p\\Desktop\\emlo-assignment\\enquiry-system\\EnquirySystem.csproj": {
+    "C:\\Users\\p\\Documents\\EnquirySystem\\enquiry-system\\EnquirySystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\p\\Desktop\\emlo-assignment\\enquiry-system\\EnquirySystem.csproj",
+        "projectUniqueName": "C:\\Users\\p\\Documents\\EnquirySystem\\enquiry-system\\EnquirySystem.csproj",
         "projectName": "EnquirySystem",
-        "projectPath": "C:\\Users\\p\\Desktop\\emlo-assignment\\enquiry-system\\EnquirySystem.csproj",
+        "projectPath": "C:\\Users\\p\\Documents\\EnquirySystem\\enquiry-system\\EnquirySystem.csproj",
         "packagesPath": "C:\\Users\\p\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\p\\Desktop\\emlo-assignment\\enquiry-system\\obj\\",
+        "outputPath": "C:\\Users\\p\\Documents\\EnquirySystem\\enquiry-system\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\p\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -38,6 +38,22 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[10.0.0, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.0.1, )"
+            },
+            "JWT": {
+              "target": "Package",
+              "version": "[7.2.1, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[3.1.8, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[3.1.8, )"
@@ -55,6 +71,10 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[5.4.1, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[6.7.1, )"
             }
           },
           "imports": [
